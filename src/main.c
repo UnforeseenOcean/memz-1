@@ -19,9 +19,7 @@ int main()
     const size_t payloads_size = sizeof(payloads) / sizeof(payload_t);
 
     for (size_t i = 0; i < payloads_size; ++i)
-    {
         CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)payload_host, &payloads[i], 0, 0);
-    }
 
     char a = getchar();
     return 0;
