@@ -3,7 +3,7 @@
 
 #define _WIN32_WINNT 0x0501
 
-#include <window.h>
+#include <memz/window.h>
 
 void shell_execute(window_t* w);
 void keyboard_malfunction(window_t* w);

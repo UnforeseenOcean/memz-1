@@ -1,5 +1,5 @@
 # Compiler
-CC = clang
+CC = gcc
 
 # One of the following options: binary (for executables), shared (for shared libraries -- DLLs) or static (for static libraries).
 OUTPUT_TYPE = binary
@@ -15,7 +15,7 @@ OBJ_PATH = obj
 
 # Compiler flags and linker options
 CFLAGS = $(INCLUDE_PATH) -g -O0 -Wall -std=c11
-LFLAGS = $(LIBRARY_PATH) -lShell32 -lUser32 -lGdi32 -lWinmm -lPsapi
+LFLAGS = $(LIBRARY_PATH) -lShell32 -lUser32 -lGdi32 -lWinmm -lPsapi -mwindows
 
 # Conditional options
 ifeq ($(OUTPUT_TYPE), shared)

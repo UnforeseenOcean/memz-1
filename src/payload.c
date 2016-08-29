@@ -1,7 +1,7 @@
 #define _WIN32_WINNT 0x0501
 
-#include <payload.h>
-#include <window.h>
+#include <memz/payload.h>
+#include <memz/window.h>
 
 #include <Windows.h>
 #include <stdio.h> //
