@@ -4,7 +4,6 @@
 #include <memz/window.h>
 
 #include <Windows.h>
-#include <stdio.h> //
 
 static void cicle(payload_t* p, window_t* window)
 {    
@@ -15,8 +14,6 @@ static void cicle(payload_t* p, window_t* window)
 
     if (p->delay < p->min_delay)
         p->delay = p->min_delay;
-
-    printf("Delay: ---%d---\n", p->delay);
 }
 
 void payload_host(void* pl)

