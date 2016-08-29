@@ -1,3 +1,5 @@
+#define _WIN32_WINNT 0x0501
+
 #include <payload.h>
 #include <window.h>
 

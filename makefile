@@ -15,7 +15,7 @@ OBJ_PATH = obj
 
 # Compiler flags and linker options
 CFLAGS = $(INCLUDE_PATH) -g -O0 -Wall -std=c11
-LFLAGS = $(LIBRARY_PATH) -lShell32 -lUser32 -lGdi32
+LFLAGS = $(LIBRARY_PATH) -lShell32 -lUser32 -lGdi32 -lWinmm -lPsapi
 
 # Conditional options
 ifeq ($(OUTPUT_TYPE), shared)
