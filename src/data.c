@@ -6,7 +6,7 @@ const size_t note_size = sizeof(note);
 
 const char* sites[] =
 {
-    /*"http://google.co.ck/search?q=best+way+to+kill+yourself",
+    "http://google.co.ck/search?q=best+way+to+kill+yourself",
     "http://google.co.ck/search?q=how+2+remove+a+virus",
     "http://google.co.ck/search?q=mcafee+vs+norton",
     "http://google.co.ck/search?q=how+to+send+a+virus+to+my+friend",
@@ -51,10 +51,7 @@ const char* sites[] =
     "mspaint",
     "devmgmt.msc",
     "control",
-    "mmc",*/
-    "https://lh3.googleusercontent.com/-Nq9qVzUqmEo/VS3spCp6TZI/AAAAAAAAJB0/vv9BOMa45v8/w698-h672/Funny-baby-in-sink.png",
-    "https://s-media-cache-ak0.pinimg.com/736x/2d/7f/93/2d7f93cbe4908ff6dc1b48043ed502d9.jpg",
-    "https://s-media-cache-ak0.pinimg.com/236x/77/15/e7/7715e7ea54a010649d68b3a7198a8920.jpg"
+    "mmc",
 };
 
 const size_t sites_size = sizeof(sites) / sizeof(char*);
