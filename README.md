@@ -2,7 +2,7 @@
 
 A rewritten version of [Leurak's MEMZ Trojan](https://github.com/Leurak/MEMZ), with cleaner code and structure.
 
-If you #define __HARMFUL__, this program WILL damage your computer.
+If you #define \__HARMFUL\__, this program WILL damage your computer.
 
 I am not responsible for any damage made using this program.
 
