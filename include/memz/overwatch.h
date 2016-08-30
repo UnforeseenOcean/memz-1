@@ -5,7 +5,8 @@
 
 #include <Windows.h>
 
-DWORD WINAPI overwatch_thread(LPVOID parameter);
-LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+void start_overwatch();
+void overwatch();
+
 
 #endif // _MEMZ_OVERWATCH_H

