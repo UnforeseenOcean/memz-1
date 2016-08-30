@@ -1,8 +1,7 @@
 #ifndef _MEMZ_PAYLOAD_FUNCTION_H
 #define _MEMZ_PAYLOAD_FUNCTION_H
 
-#define _WIN32_WINNT 0x0501
-
+#include <memz/def.h>
 #include <memz/window.h>
 
 void shell_execute(window_t* w);

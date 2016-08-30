@@ -1,5 +1,4 @@
 #include <memz/util.h>
-
 #include <Wincrypt.h>
 
 static HCRYPTPROV prov = 0;

@@ -1,8 +1,7 @@
 #ifndef _MEMZ_UTIL_H
 #define _MEMZ_UTIL_H
 
-#define _WIN32_WINNT 0x0501
-
+#include <memz/def.h>
 #include <Windows.h>
 
 int random();

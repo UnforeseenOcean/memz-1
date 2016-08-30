@@ -1,8 +1,6 @@
-#define _WIN32_WINNT 0x0501
-
+#include <memz/def.h>
 #include <memz/payload.h>
 #include <memz/window.h>
-
 #include <Windows.h>
 
 static void cicle(payload_t* p, window_t* window)
